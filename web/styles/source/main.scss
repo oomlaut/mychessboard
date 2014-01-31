@@ -10,9 +10,6 @@
 $widthContainer: 400px;
 $widthSquare: $widthContainer/8;
 
-@mixin square($dim){
-}
-
 #container{
 	width:$widthContainer;
 	margin:100px auto 0;
@@ -22,18 +19,22 @@ $widthSquare: $widthContainer/8;
 
 .rank{
 	@include clearfix;
+	position:relative;
 
-	label, .file{
-		float:left;
-		display:inline;
-	}
 	label{
+		position:absolute;
 		width:1em;
 		height:1em;
-		margin-left:-1em;
+		top:50%;
+		right:100%;
+		margin-top:-.5em;
+		margin-right:1em;
+		line-height:1;
+		text-align:center;
 	}
 	.file{
-
+		float:left;
+		display:inline;
 		border-right:1px solid #555;
 		border-bottom:1px solid #555;
 		width:$widthSquare - 1;
@@ -52,4 +53,10 @@ $widthSquare: $widthContainer/8;
 			text-align:center;
 		}
 	}
+}
+.file-labels label{
+	float:left;
+	width:$widthSquare;
+	text-align:center;
+	padding-top:1em;
 }
