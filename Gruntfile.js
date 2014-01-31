@@ -62,7 +62,7 @@ module.exports = function(grunt) {
 				tasks: ['uglify']
 			},
 			styles:{
-				files:['web/styles/main.css'],
+				files:['web/styles/source/*'],
 				tasks: ['sass:dev', 'notify:scss']
 			}
 		}

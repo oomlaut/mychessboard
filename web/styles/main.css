@@ -741,3 +741,55 @@ table {
 @media only screen and (min-width: 35em) {
   /* Style adjustments for viewports that meet the condition */
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000316}}
+#container {
+  width: 400px;
+  margin: 100px auto 0;
+  border-top: 1px solid #555;
+  border-left: 1px solid #555;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000323}}
+.rank {
+  *zoom: 1;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/bower_components\/bourbon\/app\/assets\/stylesheets\/addons\/_clearfix\.scss}line{font-family:\0000318}}
+.rank:before, .rank:after {
+  content: " ";
+  display: table;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/bower_components\/bourbon\/app\/assets\/stylesheets\/addons\/_clearfix\.scss}line{font-family:\0000323}}
+.rank:after {
+  clear: both;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000326}}
+.rank label, .rank .file {
+  float: left;
+  display: inline;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000330}}
+.rank label {
+  width: 1em;
+  height: 1em;
+  margin-left: -1em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000335}}
+.rank .file {
+  border-right: 1px solid #555;
+  border-bottom: 1px solid #555;
+  width: 49px;
+  height: 49px;
+  position: relative;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000343}}
+.rank .file span {
+  position: absolute;
+  height: 1em;
+  width: 1em;
+  top: 50%;
+  left: 50%;
+  margin-top: -.5em;
+  margin-left: -.5em;
+  line-height: 1;
+  text-align: center;
+}

@@ -4,5 +4,52 @@
 @import "print";
 
 @media only screen and (min-width: 35em) {
-    /* Style adjustments for viewports that meet the condition */
+	/* Style adjustments for viewports that meet the condition */
+}
+
+$widthContainer: 400px;
+$widthSquare: $widthContainer/8;
+
+@mixin square($dim){
+}
+
+#container{
+	width:$widthContainer;
+	margin:100px auto 0;
+	border-top:1px solid #555;
+	border-left:1px solid #555;
+}
+
+.rank{
+	@include clearfix;
+
+	label, .file{
+		float:left;
+		display:inline;
+	}
+	label{
+		width:1em;
+		height:1em;
+		margin-left:-1em;
+	}
+	.file{
+
+		border-right:1px solid #555;
+		border-bottom:1px solid #555;
+		width:$widthSquare - 1;
+		height:$widthSquare - 1;
+		position:relative;
+
+		span{
+			position:absolute;
+			height:1em;
+			width:1em;
+			top:50%;
+			left:50%;
+			margin-top:-.5em;
+			margin-left:-.5em;
+			line-height:1;
+			text-align:center;
+		}
+	}
 }
