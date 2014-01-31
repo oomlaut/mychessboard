@@ -2,3 +2,7 @@
 node_modules/
 
 # Bower Packages
+bower_components/
+
+# SASS Components
+.sass-cache/
