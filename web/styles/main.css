@@ -741,18 +741,36 @@ table {
 @media only screen and (min-width: 35em) {
   /* Style adjustments for viewports that meet the condition */
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000313}}
-#container {
-  width: 400px;
-  margin: 100px auto 0;
-  border-top: 1px solid #555;
-  border-left: 1px solid #555;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000321}}
+html {
+  font-family: tahoma;
+  font-size: 100%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000320}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000325}}
+html, html a {
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000330}}
+#container {
+  width: 480px;
+  margin: 100px auto 0;
+  border: 1px solid #555;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000336}}
+label {
+  color: #333333;
+  font-weight: bold;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000341}}
 .rank {
   *zoom: 1;
   position: relative;
+  background-color: #f2f2f2;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/bower_components\/bourbon\/app\/assets\/stylesheets\/addons\/_clearfix\.scss}line{font-family:\0000318}}
 .rank:before, .rank:after {
@@ -763,7 +781,7 @@ table {
 .rank:after {
   clear: both;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000324}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000346}}
 .rank label {
   position: absolute;
   width: 1em;
@@ -775,33 +793,54 @@ table {
   line-height: 1;
   text-align: center;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000335}}
-.rank .file {
-  float: left;
-  display: inline;
-  border-right: 1px solid #555;
-  border-bottom: 1px solid #555;
-  width: 49px;
-  height: 49px;
-  position: relative;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000358}}
+.rank .file:nth-child(even) {
+  background-color: #595959;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000344}}
-.rank .file span {
-  position: absolute;
-  height: 1em;
-  width: 1em;
-  top: 50%;
-  left: 50%;
-  margin-top: -.5em;
-  margin-left: -.5em;
-  line-height: 1;
-  text-align: center;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000361}}
+.rank:nth-child(even) {
+  background-color: #595959;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000363}}
+.rank:nth-child(even) .file:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000357}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000369}}
+.file {
+  float: left;
+  display: inline;
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000376}}
+.file .piece {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  top: 50%;
+  left: 50%;
+  margin-top: -30px;
+  margin-left: -30px;
+  padding: 15px;
+  line-height: 1;
+  font-size: 30px;
+  font-style: normal;
+  text-align: center;
+  vertical-align: center;
+  text-shadow: 0 0 10px #f2f2f2;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000392}}
+.file .piece:hover {
+  background-color: rgba(4, 174, 19, 0.5);
+  cursor: pointer;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/pgueller\/Sites\/mamp\/chessify\/web\/styles\/source\/main\.scss}line{font-family:\0000398}}
 .file-labels label {
   float: left;
-  width: 50px;
+  width: 60px;
   text-align: center;
   padding-top: 1em;
 }

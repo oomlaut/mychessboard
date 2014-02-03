@@ -1,96 +1,99 @@
 'use strict';
-function ChessifyCtrl($scope){
+function ChessifyCtrl($scope, $sce){
 
 	$scope.board = {
 		labels:{
-			ranks:[1,2,3,4,5,6,7,8],
+			ranks:['1','2','3','4','5','6','7','8'],
 			files:['a','b','c','d','e','f','g','h']
 		},
 		base:{
 			a: {
-				1:'white rookA',
-				2:'white pawnA',
+				1:'&#9814;',
+				2:'&#9817;',
 				3:false,
 				4:false,
 				5:false,
 				6:false,
-				7:'black pawnA',
-				8:'black rookA'
+				7:'&#9823;',
+				8:'&#9820;'
 			},
 			b: {
-				1:'white knightB',
-				2:'white pawnB',
+				1:'&#9816;',
+				2:'&#9817;',
 				3:false,
 				4:false,
 				5:false,
 				6:false,
-				7:'black pawnB',
-				8:'black knightB'
+				7:'&#9823;',
+				8:'&#9822;'
 			},
 			c: {
-				1:'white bishopC',
-				2:'white pawnC',
+				1:'&#9815;',
+				2:'&#9817;',
 				3:false,
 				4:false,
 				5:false,
 				6:false,
-				7:'black pawnC',
-				8:'black bishopC'
+				7:'&#9823;',
+				8:'&#9821;'
 			},
 			d: {
-				1:'white queenD',
-				2:'white pawnD',
+				1:'&#9813;',
+				2:'&#9817;',
 				3:false,
 				4:false,
 				5:false,
 				6:false,
-				7:'black pawnD',
-				8:'black queenD'
+				7:'&#9823;',
+				8:'&#9819;'
 			},
 			e: {
-				1:'white kingE',
-				2:'white pawnE',
+				1:'&#9812;',
+				2:'&#9817;',
 				3:false,
 				4:false,
 				5:false,
 				6:false,
-				7:'black pawnE',
-				8:'black kingE'
+				7:'&#9823;',
+				8:'&#9818;'
 			},
 			f: {
-				1:'white bishopF',
-				2:'white pawnF',
+				1:'&#9815;',
+				2:'&#9817;',
 				3:false,
 				4:false,
 				5:false,
 				6:false,
-				7:'black pawnF',
-				8:'black bishopF'
+				7:'&#9823;',
+				8:'&#9821;'
 			},
 			g: {
-				1:'white knightG',
-				2:'white pawnG',
+				1:'&#9816;',
+				2:'&#9817;',
 				3:false,
 				4:false,
 				5:false,
 				6:false,
-				7:'black pawnG',
-				8:'black knightG'
+				7:'&#9823;',
+				8:'&#9822;'
 			},
 			h: {
-				1:'white rookH',
-				2:'white pawnH',
+				1:'&#9814;',
+				2:'&#9817;',
 				3:false,
 				4:false,
 				5:false,
 				6:false,
-				7:'black pawnH',
-				8:'black rookH'
+				7:'&#9823;',
+				8:'&#9820;'
 			}
 		},
 		current: {}
 	};
 
+	$scope.board.labels.ranks = $scope.board.labels.ranks.reverse();
+
+	$scope.player = "white";
 
 	$scope.pieces = {
 		white:[],
@@ -98,5 +101,13 @@ function ChessifyCtrl($scope){
 	};
 
 	$scope.moves = [];
+
+	$scope.char = function(unicode){
+		return $sce.trustAsHtml(unicode);
+	}
+
+	$scope.track = function(file, rank){
+		console.log('arguments',arguments);
+	};
 
 };

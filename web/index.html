@@ -19,17 +19,17 @@
 		<script src="scripts/app.js"></script>
 		<script src="scripts/controllers/chessifyCtrl.js"></script>
 	</head>
-	<body ng-controller="ChessifyCtrl">
+	<body>
 		<!--[if lt IE 7]>
 			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
 
 		<!-- Add your site or application content here -->
-		<div id="container">
-			<div ng-repeat="rank in board.labels.ranks.reverse()" class="rank" data-rank="{{rank}}">
+		<div id="container" ng-controller="ChessifyCtrl">
+			<div ng-repeat="rank in board.labels.ranks" class="rank" data-rank="{{rank}}">
 				<label>{{rank}}</label>
-				<div ng-repeat="file in board.labels.files" class="file" data-file="{{file}}" id="{{file}}_{{rank}}">
-					<span>{{file}}{{rank}}</span>
+				<div ng-repeat="file in board.labels.files" class="file" data-file="{{file}}" id="{{file}}_{{rank}}" ng-mousedown="highlight">
+					<i ng-if="board.base[file][rank]" class="piece" ng-mousedown="track(file, rank)" ng-bind-html="char(board.base[file][rank])"></i>
 				</div>
 			</div>
 			<div class="file-labels">

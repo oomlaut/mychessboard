@@ -7,19 +7,41 @@
 	/* Style adjustments for viewports that meet the condition */
 }
 
-$widthContainer: 400px;
+
+//theming
+$labelColor:hsla(0, 0%, 20%,1);
+$blackSquare:hsla(0, 0%, 35%,1);
+$whiteSquare:hsla(0, 0%, 95%, 1);
+$hoverSquare:hsla(125, 95%, 35%,.5);
+
+
+$widthContainer: 480px;
 $widthSquare: $widthContainer/8;
+
+html{
+	font-family:tahoma;
+	font-size:100%;
+}
+html, html a {
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+}
 
 #container{
 	width:$widthContainer;
 	margin:100px auto 0;
-	border-top:1px solid #555;
-	border-left:1px solid #555;
+	border:1px solid #555;
+}
+
+label {
+	color:$labelColor;
+	font-weight:bold;
 }
 
 .rank{
 	@include clearfix;
 	position:relative;
+	background-color:$whiteSquare;
 
 	label{
 		position:absolute;
@@ -32,25 +54,44 @@ $widthSquare: $widthContainer/8;
 		line-height:1;
 		text-align:center;
 	}
-	.file{
-		float:left;
-		display:inline;
-		border-right:1px solid #555;
-		border-bottom:1px solid #555;
-		width:$widthSquare - 1;
-		height:$widthSquare - 1;
-		position:relative;
 
-		span{
-			position:absolute;
-			height:1em;
-			width:1em;
-			top:50%;
-			left:50%;
-			margin-top:-.5em;
-			margin-left:-.5em;
-			line-height:1;
-			text-align:center;
+	.file:nth-child(even){
+		background-color:$blackSquare;
+	}
+	&:nth-child(even){
+		background-color:$blackSquare;
+		.file:nth-child(even){
+			background-color:$whiteSquare;
+		}
+	}
+}
+
+.file{
+	float:left;
+	display:inline;
+	position:relative;
+	width:$widthSquare;
+	height:$widthSquare;
+
+	.piece{
+		$size: $widthSquare/2;
+		position:absolute;
+		height:$size;
+		width:$size;
+		top:50%;
+		left:50%;
+		margin-top:0 - $size;
+		margin-left:0 - $size;
+		padding:$size/2;
+		line-height:1;
+		font-size:$size;
+		font-style: normal;
+		text-align:center;
+		vertical-align: center;
+		text-shadow:0 0 10px $whiteSquare;
+		&:hover{
+			background-color:$hoverSquare;
+			cursor:pointer;
 		}
 	}
 }
