@@ -29,7 +29,7 @@ chessifyApp.controller('ChessifyCtrl', function chessifyCtrl ($scope, $sce, ches
 	 * @return {void}
 	 */
 	function scopeData(data){
-		console.log(data);
+		// console.log(data);
 		angular.copy(data, $scope.data);
 
 		// this should be populated by the 'current' node of the object eventually
