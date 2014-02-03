@@ -1,17 +1,14 @@
 'use strict';
 
-function clone(obj){
-	var copy = {};
-	for(var i in obj){
-		copy[i] = obj[i];
-	}
-	return copy;
-}
+chessifyApp.controller('ChessifyCtrl', function chessifyCtrl ($scope, $sce, chessifySvc){
 
-function ChessifyCtrl($scope, $sce){
+	// instantiate the data object, Angular has a real problem with undeclared variables.
+	$scope.data = {};
 
-	$scope.delimiter = '_';
-
+	/**
+	 * instantiates scope variables
+	 * @return {boolean} success or failure of method
+	 */
 	function init(){
 		$scope.backup = false;
 		$scope.moving = false;
@@ -26,126 +23,51 @@ function ChessifyCtrl($scope, $sce){
 
 	init();
 
-	$scope.board = {
-		labels:{
-			ranks:['1','2','3','4','5','6','7','8'],
-			files:['a','b','c','d','e','f','g','h']
-		},
-		base:{
-			a: {
-				1:'&#9814;',
-				2:'&#9817;',
-				3:false,
-				4:false,
-				5:false,
-				6:false,
-				7:'&#9823;',
-				8:'&#9820;'
-			},
-			b: {
-				1:'&#9816;',
-				2:'&#9817;',
-				3:false,
-				4:false,
-				5:false,
-				6:false,
-				7:'&#9823;',
-				8:'&#9822;'
-			},
-			c: {
-				1:'&#9815;',
-				2:'&#9817;',
-				3:false,
-				4:false,
-				5:false,
-				6:false,
-				7:'&#9823;',
-				8:'&#9821;'
-			},
-			d: {
-				1:'&#9813;',
-				2:'&#9817;',
-				3:false,
-				4:false,
-				5:false,
-				6:false,
-				7:'&#9823;',
-				8:'&#9819;'
-			},
-			e: {
-				1:'&#9812;',
-				2:'&#9817;',
-				3:false,
-				4:false,
-				5:false,
-				6:false,
-				7:'&#9823;',
-				8:'&#9818;'
-			},
-			f: {
-				1:'&#9815;',
-				2:'&#9817;',
-				3:false,
-				4:false,
-				5:false,
-				6:false,
-				7:'&#9823;',
-				8:'&#9821;'
-			},
-			g: {
-				1:'&#9816;',
-				2:'&#9817;',
-				3:false,
-				4:false,
-				5:false,
-				6:false,
-				7:'&#9823;',
-				8:'&#9822;'
-			},
-			h: {
-				1:'&#9814;',
-				2:'&#9817;',
-				3:false,
-				4:false,
-				5:false,
-				6:false,
-				7:'&#9823;',
-				8:'&#9820;'
-			},
-			player: "white"
-		},
-		current: {},
+	/**
+	 * process data returned from the service, extracted to function for reuse
+	 * @param  {obj} data raw json data
+	 * @return {void}
+	 */
+	function scopeData(data){
+		console.log(data);
+		angular.copy(data, $scope.data);
+
+		// this should be populated by the 'current' node of the object eventually
+		if(typeof $scope.data.current == 'undefined'){
+			$scope.data.current = {};
+			angular.copy($scope.data.base, $scope.data.current);
+		}
 	};
 
-	$scope.board.labels.ranks = $scope.board.labels.ranks.reverse();
+	chessifySvc.read().success(function(data){
+		scopeData(data);
+	});
 
-	// this should be populated by the 'current' node of the object eventually
-	angular.copy($scope.board.base, $scope.board.current);
-
-
-	$scope.players = {
-		"white": 'playerID001',
-		"black": 'playerID002'
-	};
-
-	$scope.pieces = [];
-
-	$scope.moves = [];
-
+	/**
+	 * utilizes angular dependency to output raw html
+	 * @param  {string} unicode the unicode string to be worked with
+	 * @return {string}         the actual character(s) to be painted
+	 */
 	$scope.char = function(unicode){
 		return $sce.trustAsHtml(unicode);
 	}
 
+	/**
+	 * fires on click of a board tile. routes the action accordingly
+	 * @param  {string} file the character identifier for the clicked file (column)
+	 * @param  {string} rank the character identifier for the clicked rank (row)
+	 * @return {eval}      	 optionally executes a function in certain conditions
+	 */
 	$scope.track = function(file, rank){
-		if($scope.board.current[file][rank] || $scope.moving){
+		if($scope.data.current[file][rank] || $scope.moving){
 			// back up the current state of the board once.
 			if(!$scope.backup){
 				$scope.backup = {};
-				angular.copy($scope.board.current, $scope.backup);
+				angular.copy($scope.data.current, $scope.backup);
 			}
 
-			var ords = file + $scope.delimiter + rank;
-			var value = $scope.board.current[file][rank]
+			var ords = file + $scope.data.delimiter + rank;
+			var value = $scope.data.current[file][rank]
 
 			if (!$scope.origin) {
 				$scope.moving = true;
@@ -156,7 +78,7 @@ function ChessifyCtrl($scope, $sce){
 			} else if (ords == $scope.origin.ords){
 				return $scope.cancel();
 			} else {
-				var fromOrdParts = $scope.origin.ords.split($scope.delimiter);
+				var fromOrdParts = $scope.origin.ords.split($scope.data.delimiter);
 
 				if(value != false){
 					$scope.turn.pieces.push(value);
@@ -164,9 +86,9 @@ function ChessifyCtrl($scope, $sce){
 
 				$scope.turn.moves.push($scope.origin.ords + '/' + ords);
 
-				$scope.board.current[file][rank] = $scope.origin.value;
+				$scope.data.current[file][rank] = $scope.origin.value;
 
-				$scope.board.current[fromOrdParts[0]][fromOrdParts[1]] = false;
+				$scope.data.current[fromOrdParts[0]][fromOrdParts[1]] = false;
 
 
 				$scope.origin = false;
@@ -176,34 +98,49 @@ function ChessifyCtrl($scope, $sce){
 		}
 	};
 
+	/**
+	 * parse and process the data, send for storage
+	 * @return {eval} reinstantiate scope variables for the next turn
+	 */
 	$scope.submit = function(){
 		//validate data, send to service, restore board appearance
 
 		// append taken pieces onto into the corral
-		$scope.pieces = $scope.pieces.concat($scope.turn.pieces);
-		console.log('pieces',$scope.pieces);
+		$scope.data.current.pieces = $scope.data.current.pieces.concat($scope.turn.pieces);
 
 		// append move(s) onto the history object
-		$scope.moves = $scope.moves.concat($scope.turn.moves);
-		console.log('moves',$scope.moves);
+		$scope.data.current.moves = $scope.data.current.moves.concat($scope.turn.moves);
 
 		// change player turn
-		$scope.board.current.player = ($scope.board.current.player === 'white') ? 'black' : 'white' ;
+		$scope.data.current.player = ($scope.data.current.player === 'white') ? 'black' : 'white' ;
+
+		// send the data off to the service for storage
+		chessifySvc.store($scope.data);
 
 		return init();
 	};
 
+	/**
+	 * abort current action, restore data object from "backup"
+	 * @return {eval} reinstantiates scope variables for the next turn
+	 */
 	$scope.cancel = function(){
-		angular.copy($scope.backup, $scope.board.current);
+		angular.copy($scope.backup, $scope.data.current);
 		return init();
 	};
 
+	/**
+	 * resets the game to its original condition
+	 * @return {eval} reinstantiates scope variables for the next turn
+	 */
 	$scope.reset = function(){
 		var response = confirm("Are you sure?");
 		if(response){
-			angular.copy($scope.board.base, $scope.board.current);
+			chessifySvc.reset().success(function(data){
+				scopeData(data);
+			});
 			// send the revised
 			return init();
 		}
 	}
-};
+});
