@@ -25,9 +25,9 @@ module.exports = function(grunt) {
 			},
 			dev:{
 				options:{
-					style:'expanded',
-					debugInfo: true,
-					lineNumber: true
+					style:'expanded'
+					// debugInfo: true,
+					// lineNumber: true
 				},
 				files: '<%= files.scss %>'
 			},

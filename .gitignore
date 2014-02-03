@@ -6,3 +6,6 @@ bower_components/
 
 # SASS Components
 .sass-cache/
+
+# compiled assets
+*.css

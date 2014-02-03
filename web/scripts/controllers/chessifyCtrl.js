@@ -1,5 +1,30 @@
 'use strict';
+
+function clone(obj){
+	var copy = {};
+	for(var i in obj){
+		copy[i] = obj[i];
+	}
+	return copy;
+}
+
 function ChessifyCtrl($scope, $sce){
+
+	$scope.delimiter = '_';
+
+	function init(){
+		$scope.backup = false;
+		$scope.moving = false;
+		$scope.confirm = false;
+		$scope.origin = false;
+		$scope.turn = {
+			'moves': [],
+			'pieces': []
+		};
+		return true;
+	};
+
+	init();
 
 	$scope.board = {
 		labels:{
@@ -86,19 +111,24 @@ function ChessifyCtrl($scope, $sce){
 				6:false,
 				7:'&#9823;',
 				8:'&#9820;'
-			}
+			},
+			player: "white"
 		},
-		current: {}
+		current: {},
 	};
 
 	$scope.board.labels.ranks = $scope.board.labels.ranks.reverse();
 
-	$scope.player = "white";
+	// this should be populated by the 'current' node of the object eventually
+	angular.copy($scope.board.base, $scope.board.current);
 
-	$scope.pieces = {
-		white:[],
-		black:[]
+
+	$scope.players = {
+		"white": 'playerID001',
+		"black": 'playerID002'
 	};
+
+	$scope.pieces = [];
 
 	$scope.moves = [];
 
@@ -107,7 +137,73 @@ function ChessifyCtrl($scope, $sce){
 	}
 
 	$scope.track = function(file, rank){
-		console.log('arguments',arguments);
+		if($scope.board.current[file][rank] || $scope.moving){
+			// back up the current state of the board once.
+			if(!$scope.backup){
+				$scope.backup = {};
+				angular.copy($scope.board.current, $scope.backup);
+			}
+
+			var ords = file + $scope.delimiter + rank;
+			var value = $scope.board.current[file][rank]
+
+			if (!$scope.origin) {
+				$scope.moving = true;
+				$scope.origin = {
+					'ords': ords,
+					'value': value
+				};
+			} else if (ords == $scope.origin.ords){
+				return $scope.cancel();
+			} else {
+				var fromOrdParts = $scope.origin.ords.split($scope.delimiter);
+
+				if(value != false){
+					$scope.turn.pieces.push(value);
+				}
+
+				$scope.turn.moves.push($scope.origin.ords + '/' + ords);
+
+				$scope.board.current[file][rank] = $scope.origin.value;
+
+				$scope.board.current[fromOrdParts[0]][fromOrdParts[1]] = false;
+
+
+				$scope.origin = false;
+
+				$scope.confirm = true;
+			}
+		}
 	};
 
+	$scope.submit = function(){
+		//validate data, send to service, restore board appearance
+
+		// append taken pieces onto into the corral
+		$scope.pieces = $scope.pieces.concat($scope.turn.pieces);
+		console.log('pieces',$scope.pieces);
+
+		// append move(s) onto the history object
+		$scope.moves = $scope.moves.concat($scope.turn.moves);
+		console.log('moves',$scope.moves);
+
+		// change player turn
+		$scope.board.current.player = ($scope.board.current.player === 'white') ? 'black' : 'white' ;
+
+		return init();
+	};
+
+	$scope.cancel = function(){
+		angular.copy($scope.backup, $scope.board.current);
+		return init();
+	};
+
+	$scope.reset = function(){
+		var response = confirm("Are you sure?");
+		if(response){
+			angular.copy($scope.board.base, $scope.board.current);
+			// send the revised
+			return init();
+		}
+	}
 };

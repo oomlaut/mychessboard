@@ -19,21 +19,30 @@
 		<script src="scripts/app.js"></script>
 		<script src="scripts/controllers/chessifyCtrl.js"></script>
 	</head>
-	<body>
+	<body ng-controller="ChessifyCtrl">
 		<!--[if lt IE 7]>
 			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
 
 		<!-- Add your site or application content here -->
-		<div id="container" ng-controller="ChessifyCtrl">
+		<h1>Current turn: {{players[board.current.player]}} ({{board.current.player}})</h1>
+		<div id="container" ng-class="{'in-progress': moving}">
+
 			<div ng-repeat="rank in board.labels.ranks" class="rank" data-rank="{{rank}}">
 				<label>{{rank}}</label>
-				<div ng-repeat="file in board.labels.files" class="file" data-file="{{file}}" id="{{file}}_{{rank}}" ng-mousedown="highlight">
-					<i ng-if="board.base[file][rank]" class="piece" ng-mousedown="track(file, rank)" ng-bind-html="char(board.base[file][rank])"></i>
+				<div ng-repeat="file in board.labels.files" class="file" data-file="{{file}}" id="{{file}}{{delimiter}}{{rank}}" ng-class="{'start': origin.ords == (file + delimiter + rank)}" ng-click="track(file, rank)">
+					<i ng-if="board.current[file][rank]" class="piece" ng-bind-html="char(board.current[file][rank])"></i>
 				</div>
 			</div>
+
 			<div class="file-labels">
 				<label ng-repeat="file in board.labels.files">{{file}}</label>
+			</div>
+
+			<div class="btn-group">
+				<button ng-if="backup && confirm" type="button" class="btn" ng-click="submit()">Submit</button>
+				<button ng-if="moving" type="button" class="btn" ng-click="cancel()">Cancel</button>
+				<button type="button" class="btn" ng-click="reset()">New Game</button>
 			</div>
 		</div>
 

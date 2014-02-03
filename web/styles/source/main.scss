@@ -12,14 +12,16 @@
 $labelColor:hsla(0, 0%, 20%,1);
 $blackSquare:hsla(0, 0%, 35%,1);
 $whiteSquare:hsla(0, 0%, 95%, 1);
-$hoverSquare:hsla(125, 95%, 35%,.5);
+$hoverSquare:hsla(50, 95%, 55%, .66);
+$selectSquare:hsla(125, 95%, 35%,.66);
+$errorSquare:hsla(10,85%, 40%, 1);
 
 
 $widthContainer: 480px;
 $widthSquare: $widthContainer/8;
 
 html{
-	font-family:tahoma;
+	font-family:Sans-serif;
 	font-size:100%;
 }
 html, html a {
@@ -27,10 +29,15 @@ html, html a {
     text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
 }
 
+h1{
+	text-align:center;
+}
+
 #container{
-	width:$widthContainer;
-	margin:100px auto 0;
 	border:1px solid #555;
+	margin:100px auto 0;
+	position:relative;
+	width:$widthContainer;
 }
 
 label {
@@ -44,15 +51,15 @@ label {
 	background-color:$whiteSquare;
 
 	label{
-		position:absolute;
-		width:1em;
 		height:1em;
-		top:50%;
-		right:100%;
-		margin-top:-.5em;
-		margin-right:1em;
 		line-height:1;
+		margin-right:1em;
+		margin-top:-.5em;
+		position:absolute;
+		right:100%;
 		text-align:center;
+		top:50%;
+		width:1em;
 	}
 
 	.file:nth-child(even){
@@ -63,6 +70,12 @@ label {
 		.file:nth-child(even){
 			background-color:$whiteSquare;
 		}
+	}
+	.start{
+		background-color:$hoverSquare !important;
+	}
+	.move-to{
+		background-color:$selectSquare;
 	}
 }
 
@@ -75,29 +88,61 @@ label {
 
 	.piece{
 		$size: $widthSquare/2;
-		position:absolute;
-		height:$size;
-		width:$size;
-		top:50%;
-		left:50%;
-		margin-top:0 - $size;
-		margin-left:0 - $size;
-		padding:$size/2;
-		line-height:1;
 		font-size:$size;
 		font-style: normal;
+		height:$size;
+		left:50%;
+		line-height:1;
+		margin-left:0 - $size;
+		margin-top:0 - $size;
+		padding:$size/2;
+		position:absolute;
 		text-align:center;
-		vertical-align: center;
 		text-shadow:0 0 10px $whiteSquare;
+		top:50%;
+		vertical-align: center;
+		width:$size;
+
 		&:hover{
 			background-color:$hoverSquare;
 			cursor:pointer;
+			.in-progress &{
+				background-color:transparent;
+				cursor:default;
+			}
+		}
+	}
+
+	.in-progress &:hover{
+		background-color:$selectSquare !important;
+		&.start .piece{
+			background-color:$errorSquare !important;
 		}
 	}
 }
-.file-labels label{
-	float:left;
-	width:$widthSquare;
-	text-align:center;
-	padding-top:1em;
+
+.file-labels{
+	@include clearfix;
+	position:absolute;
+	width:$widthContainer;
+	top:100%;
+	left:0;
+	label{
+		float:left;
+		width:$widthSquare;
+		text-align:center;
+		padding-top:1em;
+	}
+}
+
+.btn-group{
+	position:absolute;
+	width:100%;
+	bottom:100%;
+	text-align:right;
+	margin-top:1em;
+	padding-bottom:1em;
+	.btn{
+		display:inline-block;
+	}
 }
