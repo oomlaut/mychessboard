@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 
 		files:{
 			scss:{
-				'web/styles/main.css': 'web/styles/source/main.scss'
+				'public/styles/main.css': 'public/styles/source/main.scss'
 			}
 		},
 
@@ -58,11 +58,11 @@ module.exports = function(grunt) {
 				livereload:false
 			},
 			scripts:{
-				files:['web/scripts/source/*.js'],
+				files:['public/scripts/source/*.js'],
 				tasks: ['uglify']
 			},
 			styles:{
-				files:['web/styles/source/*'],
+				files:['public/styles/source/*'],
 				tasks: ['sass:dev', 'notify:scss']
 			}
 		}
