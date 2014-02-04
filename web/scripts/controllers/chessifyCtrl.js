@@ -1,6 +1,6 @@
 'use strict';
 
-chessifyApp.controller('ChessifyCtrl', function chessifyCtrl ($scope, $sce, chessifySvc){
+chessify.controller('ctrl', function ctrl ($scope, $sce, svc){
 
 	// instantiate the data object, Angular has a real problem with undeclared variables.
 	$scope.data = {};
@@ -39,7 +39,7 @@ chessifyApp.controller('ChessifyCtrl', function chessifyCtrl ($scope, $sce, ches
 		}
 	};
 
-	chessifySvc.read().success(function(data){
+	svc.read().success(function(data){
 		scopeData(data);
 	});
 
@@ -115,7 +115,7 @@ chessifyApp.controller('ChessifyCtrl', function chessifyCtrl ($scope, $sce, ches
 		$scope.data.current.player = ($scope.data.current.player === 'white') ? 'black' : 'white' ;
 
 		// send the data off to the service for storage
-		chessifySvc.store($scope.data);
+		svc.store($scope.data);
 
 		return init();
 	};
@@ -136,11 +136,31 @@ chessifyApp.controller('ChessifyCtrl', function chessifyCtrl ($scope, $sce, ches
 	$scope.reset = function(){
 		var response = confirm("Are you sure?");
 		if(response){
-			chessifySvc.reset().success(function(data){
+			svc.reset().success(function(data){
 				scopeData(data);
 			});
 			// send the revised
 			return init();
+		}
+	};
+
+	$scope.players = {
+		editing: false,
+		data: {},
+		edit: function(){
+			angular.copy($scope.data, this.data);
+			this.editing = true;
+
+		},
+		cancel: function(){
+			this.editing = false;
+			this.data = {};
+		},
+		save: function(){
+			// send the data off to the service for storage
+			svc.store(this.data);
+			angular.copy(this.data, $scope.data);
+			this.editing = false;
 		}
 	}
 });

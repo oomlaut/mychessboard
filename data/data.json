@@ -90,7 +90,7 @@
 		"moves": []
 	},
 	"players": {
-		"white": "playerID001",
-		"black": "playerID002"
+		"white": "Player1",
+		"black": "Player2"
 	}
 }

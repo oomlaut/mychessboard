@@ -1,6 +1,6 @@
 'use strict';
 
-chessifyApp.factory('chessifySvc', function($http){
+chessify.factory('svc', function($http){
 
 	return {
 		reset: function(){

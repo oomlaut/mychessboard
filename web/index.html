@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="ChessifyApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="ChessifyApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="ChessifyApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="ChessifyApp" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html lang="en" ng-app="chessify" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="chessify" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="chessify" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="chessify" class="no-js"> <!--<![endif]-->
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,17 +13,18 @@
 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
 		<link rel="stylesheet" href="styles/main.css">
-		<script src="scripts/modernizr.min.js" async></script>
+		<!-- script src="scripts/modernizr.min.js" async></script -->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.11/angular.min.js"></script>
 	</head>
-	<body ng-controller="ChessifyCtrl">
+	<body ng-controller="ctrl">
 		<!--[if lt IE 7]>
 			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
 
 		<!-- Add your site or application content here -->
 		<h1>Current turn: {{data.players[data.current.player]}} ({{data.current.player}})</h1>
-		<div id="container" ng-class="{'in-progress': moving}">
+
+		<div id="container" ng-if="data" ng-class="{'in-progress': moving}">
 
 			<div ng-repeat="rank in data.labels.ranks" class="rank" data-rank="{{rank}}">
 				<label>{{rank}}</label>
@@ -45,6 +46,18 @@
 				<button ng-if="moving" type="button" class="btn" ng-click="cancel()">Cancel</button>
 				<button type="button" class="btn" ng-click="reset()">New Game</button>
 			</div>
+		</div>
+
+		<div id="players">
+			<button ng-if="!players.editing" type="button" class="btn" ng-click="players.edit()">Edit Players</button>
+
+			<div ng-if="players.editing" ng-repeat="(key, value) in players.data.players">
+				<label for="{{key}}" capitalizeFirst>{{key}}</label>
+				<input name="{{key}}" id="{{key}}" ng-model="players.data.players[key]" >
+			</div>
+
+			<button ng-if="players.editing" type="button" class="btn" ng-click="players.cancel()">Cancel</button>
+			<button ng-if="players.editing" type="button" class="btn" ng-click="players.save()">Save</button>
 		</div>
 
 		<script src="scripts/app.js"></script>

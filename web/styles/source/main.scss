@@ -31,13 +31,17 @@ html, html a {
     text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
 }
 
+body{
+	padding:20px 0 50px;
+}
+
 h1{
 	text-align:center;
 }
 
 #container{
 	border:1px solid #555;
-	margin:100px auto 0;
+	margin:40px auto 0;
 	position:relative;
 	width:$widthContainer;
 }
@@ -157,8 +161,19 @@ label {
 	bottom:100%;
 	text-align:right;
 	margin-top:1em;
-	padding-bottom:1em;
+	padding-bottom:.25em;
 	.btn{
 		display:inline-block;
+	}
+}
+
+#players{
+	@extend #container;
+	border-width:0;
+	label{
+		text-transform: capitalize;
+	}
+	div{
+		padding-top:20px;
 	}
 }
