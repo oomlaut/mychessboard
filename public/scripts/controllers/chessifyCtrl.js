@@ -4,6 +4,7 @@ chessify.controller('ctrl', function ctrl ($scope, $sce, svc){
 
 	// instantiate the data object, Angular has a real problem with undeclared variables.
 	$scope.data = {};
+	$scope.loading = false;
 
 	/**
 	 * instantiates scope variables
@@ -39,9 +40,17 @@ chessify.controller('ctrl', function ctrl ($scope, $sce, svc){
 		}
 	};
 
-	svc.read().success(function(data){
-		scopeData(data);
-	});
+	/**
+	 * encapsulates the call to the service with promise and response
+	 * @return {void}
+	 */
+	$scope.loadData = function(){
+		svc.read().success(function(data){
+			scopeData(data);
+		});
+	};
+
+	$scope.loadData();
 
 	/**
 	 * utilizes angular dependency to output raw html
@@ -50,7 +59,7 @@ chessify.controller('ctrl', function ctrl ($scope, $sce, svc){
 	 */
 	$scope.char = function(unicode){
 		return $sce.trustAsHtml(unicode);
-	}
+	};
 
 	/**
 	 * fires on click of a board tile. routes the action accordingly
@@ -142,6 +151,10 @@ chessify.controller('ctrl', function ctrl ($scope, $sce, svc){
 			// send the revised
 			return init();
 		}
+	};
+
+	$scope.refresh = function(){
+		$scope.loadData();
 	};
 
 	$scope.players = {
