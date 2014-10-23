@@ -15,8 +15,7 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
-    "angular": "~1.2.10",
+  "dependencies": {
     "bourbon": "~3.1.8"
   }
 }

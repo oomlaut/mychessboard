@@ -1,11 +1,22 @@
 # NPM Packages
-node_modules/
+node_modules
+
+# Logs
+*.log
 
 # Bower Packages
-bower_components/
+bower_components
+.bower-cache
+.bower-registry
 
 # SASS Components
-.sass-cache/
+.sass-cache
+
+# Source Maps
+*.map
 
 # compiled assets
-*.css
+public/styles/*.css
+
+# Data
+data.json

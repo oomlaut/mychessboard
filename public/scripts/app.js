@@ -1,3 +1,3 @@
 'use strict';
 
-var chessify = angular.module('chessify', [])
+var app = angular.module('mychessboard', [])

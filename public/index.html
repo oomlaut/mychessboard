@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="chessify" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="chessify" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="chessify" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="chessify" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html lang="en" ng-app="mychessboard" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="mychessboard" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="mychessboard" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="mychessboard" class="no-js"> <!--<![endif]-->
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>chessify</title>
+		<title>mychessboard</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
 		<link rel="stylesheet" href="styles/main.css">
-		<!-- script src="scripts/modernizr.min.js" async></script -->
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.11/angular.min.js"></script>
+
+		<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
 	</head>
 	<body ng-controller="ctrl">
 		<!--[if lt IE 7]>
@@ -62,8 +64,8 @@
 		</div>
 
 		<script src="scripts/app.js"></script>
-		<script src="scripts/services/chessifySvc.js"></script>
-		<script src="scripts/controllers/chessifyCtrl.js"></script>
+		<script src="scripts/appSvc.js"></script>
+		<script src="scripts/appCtrl.js"></script>
 
 		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID.
 		<script>

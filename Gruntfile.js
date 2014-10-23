@@ -1,11 +1,17 @@
 module.exports = function(grunt) {
 
+	require('load-grunt-tasks')(grunt);
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
 		files:{
-			scss:{
-				'public/styles/main.css': 'public/styles/source/main.scss'
+			path: {
+				bower: 'bower_components',
+				styles: 'public/styles'
+			},
+			sass:{
+				'<%= files.path.styles %>/main.css': '<%= files.path.styles %>/source/main.scss'
 			}
 		},
 
@@ -21,15 +27,16 @@ module.exports = function(grunt) {
 
 		sass:{
 			options: {
-				banner: "/* <%= pkg.name %> styles */"
+				banner: '/* <%= pkg.name %> styles */',
+				loadPath: '<%= files.path.bower %>'
 			},
 			dev:{
 				options:{
-					style:'expanded'
-					// debugInfo: true,
-					// lineNumber: true
+					style:'expanded',
+					debugInfo: true,
+					lineNumber: true
 				},
-				files: '<%= files.scss %>'
+				files: '<%= files.sass %>'
 			},
 			dist:{
 				options:{
@@ -37,18 +44,7 @@ module.exports = function(grunt) {
 					noCache:true,
 					quiet:true
 				},
-				files: '<%= files.scss %>'
-			}
-		},
-
-		notify:{
-			options:{
-				title: 'Chessify Notification'
-			},
-			scss:{
-				options:{
-					message: 'scss files compiled'
-				}
+				files: '<%= files.sass %>'
 			}
 		},
 
@@ -57,25 +53,22 @@ module.exports = function(grunt) {
 				debounceDelay:1000,
 				livereload:false
 			},
-			scripts:{
-				files:['public/scripts/source/*.js'],
-				tasks: ['uglify']
-			},
+			// scripts:{
+			// 	files:['public/scripts/source/*.js'],
+			// 	tasks: ['uglify']
+			// },
 			styles:{
-				files:['public/styles/source/*'],
-				tasks: ['sass:dev', 'notify:scss']
+				files:['<%= files.path.styles %>/source/*'],
+				tasks: ['sass:dev']
 			}
 		}
 	});
 
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-sass');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-notify');
-
-	grunt.registerTask('default', ['sass:dev', 'watch']);
-	grunt.registerTask('compile', ['sass:dev']);
+	grunt.registerTask('default', ['dev', 'watch']);
+	grunt.registerTask('dev', ['sass:dev']);
 	grunt.registerTask('dist', ['sass:dist']);
+
+    grunt.registerTask('heroku:development', ['dev']);
+    grunt.registerTask('heroku:production', ['dist']);
 
 };

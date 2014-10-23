@@ -1,6 +1,6 @@
 'use strict';
 
-chessify.controller('ctrl', function ctrl ($scope, $sce, svc){
+app.controller('ctrl', function ctrl ($scope, $sce, svc){
 
 	// instantiate the data object, Angular has a real problem with undeclared variables.
 	$scope.data = {};
