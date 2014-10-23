@@ -68,7 +68,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('dev', ['sass:dev']);
 	grunt.registerTask('dist', ['sass:dist']);
 
-    // grunt.registerTask('heroku:development', ['dev']);
+    grunt.registerTask('heroku:development', ['dev']);
     grunt.registerTask('heroku:production', ['dist']);
 
 };
