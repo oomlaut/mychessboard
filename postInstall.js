@@ -6,8 +6,8 @@ if (process.env === undefined){
         if(error !== null) {
             throw error
         };
-        console.log('bower install: ',stdout);
-        console.log('bower errors: ',stderr);
+        console.log("bower install: \n",stdout);
+        console.log("bower errors: \n",stderr);
     });
 } else {
     var env = process.env.NODE_ENV;
@@ -17,8 +17,8 @@ if (process.env === undefined){
             if(error !== null) {
                 throw error
             };
-            console.log('bower install: ', stdout);
-            console.log('bower errors: ', stderr);
+            console.log("bower install: \n", stdout);
+            console.log("bower errors: \n", stderr);
         });
         return;
     }
