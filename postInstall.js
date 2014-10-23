@@ -21,8 +21,7 @@ if (process.env === undefined){
             console.log('bower errors: ', stderr);
         });
         return;
-    } else {
-        console.log('no environment for ', env);
-        return;
     }
+    console.log('no environment for ', env);
+    process.exit(1);
 }
