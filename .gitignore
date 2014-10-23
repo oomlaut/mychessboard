@@ -1,3 +1,6 @@
+# Heroku
+.env
+
 # NPM Packages
 node_modules
 
