@@ -2,6 +2,8 @@
 
 A simple DOM-based representation of a chessboard with JavaScript drag-and-drop functionality
 
+[![endorse](https://api.coderwall.com/oomlaut/endorsecount.png)](https://coderwall.com/oomlaut)
+
 ## node.js on Heroku
 
 A barebones Node.js app using [Express 4](http://expressjs.com/).
