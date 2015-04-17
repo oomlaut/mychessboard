@@ -1,7 +1,7 @@
 {
-  "name": "Node.js Getting Started",
-  "description": "A barebones Node.js app using Express 4",
-  "repository": "https://github.com/heroku/node-js-getting-started",
-  "logo": "http://node-js-sample.herokuapp.com/node.svg",
-  "keywords": ["node", "express", "static"]
+  "name": "myChessboard",
+  "description": "A web app representation of a chessboard using Angular.js",
+  "repository": "https://github.com/oomlaut/mychessboard",
+  "logo": "http://mychessboard.herokuapp.com/images/node.svg",
+  "keywords": ["node", "express", "static", "angular"]
 }

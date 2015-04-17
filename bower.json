@@ -2,11 +2,11 @@
   "name": "web",
   "version": "0.0.1",
   "authors": [
-    "Paul Gueller <paul.gueller@7summitsagency.com>"
+    "Paul Gueller <paul.gueller@gmail.com>"
   ],
-  "main": "index.html",
-  "license": "MIT",
-  "homepage": "http://chessify.projects.paulgueller.com",
+  "main": "app.js",
+  "license": "ISC",
+  "homepage": "http://mychessboard.herokuapp.com",
   "private": true,
   "ignore": [
     "**/.*",
